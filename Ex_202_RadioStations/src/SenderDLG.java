@@ -1,9 +1,11 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author johannesriedmueller
@@ -12,6 +14,7 @@ public class SenderDLG extends javax.swing.JDialog {
 
     private Sender sender;
     private boolean ok = false;
+
     public SenderDLG(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -85,11 +88,24 @@ public class SenderDLG extends javax.swing.JDialog {
     public boolean isOk() {
         return ok;
     }
-    
+
     private void btOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOkActionPerformed
-        ok = true;
-        sender = new Sender(tfSender.getText(), Double.parseDouble(tfFrequency.getText()), tfBand.getText());
-        this.dispose();
+        try {
+            if (Double.parseDouble(tfFrequency.getText()) < 0 || Double.parseDouble(tfFrequency.getText()) > 1000) {
+                JOptionPane.showMessageDialog(null, "Too high/low freqency! (only 0 - 1000");
+            } else if ((!tfSender.getText().equals(""))&&(!tfBand.getText().equals(""))&&(!tfFrequency.getText().equals(""))){
+                ok = true;
+                sender = new Sender(tfSender.getText(), Double.parseDouble(tfFrequency.getText()), tfBand.getText());
+                this.dispose();
+            }
+            else{
+                throw new Exception();
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error with input! (Double with '.') Are all textfields filled?");
+        } 
+
+        
     }//GEN-LAST:event_btOkActionPerformed
 
     private void btCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelActionPerformed
