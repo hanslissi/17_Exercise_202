@@ -15,6 +15,7 @@ public class RadioGUI extends javax.swing.JFrame {
         initComponents();
         taAll.setModel(bl);
         taAll.setDefaultRenderer(Object.class, new SenderTableRenderer());
+        initTable();
     }
 
     /**
@@ -82,7 +83,11 @@ public class RadioGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public void initTable(){
+        taAll.getColumnModel().getColumn(0).setMinWidth(150);
+        taAll.getColumnModel().getColumn(1).setMinWidth(120);
+        taAll.getColumnModel().getColumn(2).setMinWidth(50);
+    }
     private void miAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAddActionPerformed
         SenderDLG dialog = new SenderDLG(this, true);
         dialog.setVisible(true);
