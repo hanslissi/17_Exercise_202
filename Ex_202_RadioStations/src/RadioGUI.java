@@ -1,3 +1,7 @@
+
+import java.io.File;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -60,6 +64,14 @@ public class RadioGUI extends javax.swing.JFrame {
         pmPopUp.add(miShow);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setComponentPopupMenu(pmPopUp);
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_END);
@@ -103,6 +115,24 @@ public class RadioGUI extends javax.swing.JFrame {
     private void miShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miShowActionPerformed
         bl.showBand();
     }//GEN-LAST:event_miShowActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        try{
+            bl.load(new File("./allSenders.ser"));
+        }
+        catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Error with file!");
+        }
+    }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        try{
+            bl.save(new File("./allSenders.ser"));
+        }
+        catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Error with file!");
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

@@ -33,7 +33,7 @@ public class SenderTableRenderer implements TableCellRenderer {
                 label.setText(Double.toString(s.getFrequency()));
                 break;
             case 2:
-                label.setText(s.getBand());
+                label.setText(s.getBand().toUpperCase());
                 break;
         }
         if (isSelected) {
