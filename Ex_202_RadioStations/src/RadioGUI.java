@@ -30,6 +30,7 @@ public class RadioGUI extends javax.swing.JFrame {
         miAdd = new javax.swing.JMenuItem();
         miHide = new javax.swing.JMenuItem();
         miShow = new javax.swing.JMenuItem();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         taAll = new javax.swing.JTable();
 
@@ -59,6 +60,9 @@ public class RadioGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setComponentPopupMenu(pmPopUp);
+        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_END);
+
         taAll.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -71,6 +75,7 @@ public class RadioGUI extends javax.swing.JFrame {
             }
         ));
         taAll.setComponentPopupMenu(pmPopUp);
+        taAll.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(taAll);
 
         getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -87,11 +92,11 @@ public class RadioGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_miAddActionPerformed
 
     private void miHideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miHideActionPerformed
-        // TODO add your handling code here:
+        bl.hideBand();
     }//GEN-LAST:event_miHideActionPerformed
 
     private void miShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miShowActionPerformed
-        // TODO add your handling code here:
+        bl.showBand();
     }//GEN-LAST:event_miShowActionPerformed
 
     /**
@@ -131,6 +136,7 @@ public class RadioGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuItem miAdd;
     private javax.swing.JMenuItem miHide;

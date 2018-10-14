@@ -14,14 +14,48 @@ import javax.swing.table.AbstractTableModel;
  */
 public class SenderTableModel extends AbstractTableModel{
     private ArrayList<Sender> sender = new ArrayList<>();
-    private String[] colNames = {};
-    
+    private String[] colNames = {"Sender", "Frequenz", "Band"};
+    private boolean isHidden;
     
     public void add(Sender s){
-        sender.add(s);
-        fireTableRowsInserted(sender.size()-1, sender.size()-1);
+        if(sender.isEmpty()){
+            sender.add(s);
+        }
+        else if(sender.size() == 1){
+            sender.add(binarySearch(sender.size()-1, sender.size()-1, s.getFrequency()),s);
+        }
+        else{
+            sender.add(binarySearch(0, sender.size()-1, s.getFrequency()),s);
+        }
+        
+        fireTableRowsInserted(0, sender.size()-1);
     }
 
+    public void hideBand(){
+        isHidden = true;
+        fireTableStructureChanged();
+    }
+    
+    public void showBand(){
+        isHidden = false;
+        fireTableStructureChanged();
+    }
+    
+    public int binarySearch(int li, int re, double frequency){
+        if(li>re){
+            return li;
+        }
+        
+        int mi = (li+re)/2;
+        if(sender.get(mi).getFrequency() < frequency){
+            return binarySearch(mi+1, re, frequency);
+        }
+        if(sender.get(mi).getFrequency() > frequency){
+            return binarySearch(li, mi-1, frequency);
+        }
+        return li;
+    }
+    
     @Override
     public String getColumnName(int column) {
         return colNames[column];
@@ -34,6 +68,9 @@ public class SenderTableModel extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
+        if(isHidden){
+            return colNames.length-1;
+        }
         return colNames.length;
     }
 
