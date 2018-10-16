@@ -1,4 +1,7 @@
+package GUI;
 
+
+import BL.Sender;
 import javax.swing.JOptionPane;
 
 /*
