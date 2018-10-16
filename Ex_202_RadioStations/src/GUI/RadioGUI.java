@@ -1,4 +1,9 @@
+package GUI;
 
+
+import BL.SenderTableRenderer;
+import BL.SenderTableModel;
+import GUI.SenderDLG;
 import java.io.File;
 import javax.swing.JOptionPane;
 
